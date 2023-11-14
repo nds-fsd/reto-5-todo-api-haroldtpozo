@@ -9,7 +9,14 @@ exports.todos = [{
   text: "Ir al super",
   fecha: new Date("2022-05-14"),
   done: true
-}];
+},
+{ 
+  id: 2,
+  text: "Hacer el reto",
+  fecha: new Date("2022-05-14"),
+  done: true
+}
+];
 
 
 
