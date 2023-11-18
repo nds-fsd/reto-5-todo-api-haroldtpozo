@@ -18,8 +18,6 @@ const getById = (req,res)=>{
     res.json(element);
 };
 
-
-
 // 
 
 const postCreate = (req,res)=>{
@@ -36,7 +34,6 @@ const postCreate = (req,res)=>{
 
     res.json(newUser);
 }
-
 
 // 
 
