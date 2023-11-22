@@ -30,14 +30,23 @@ const postCreate = (req,res)=>{
         return res.status(404).json ({message:"No hay datos"})
         
     } else {
-    const currentId = todos.map((todo)=> todo.id)
-    todos.push({...body, id:Math.max(currentId)+1});
-    return res.status(201).json ({data});
-    }
+        const currentId = todos.map((todo)=> todo.id);
+        const newId= Math.max(...currentId)+1;
+        const newUser= {
+            id: newId,
+            text: body.text,
+            fecha: new Date (),
+            done: body.done,
+        };
+        
+        todos.push(newUser);
+        return res.status(201).json(newUser);
+   }
     
+   
 };
 
-// 
+
 
 const putUpdate = (req,res)=>{
 
@@ -57,20 +66,6 @@ const putUpdate = (req,res)=>{
     todos = updateIndex;
     
     return res.status(201).json ({data: toDo})
-
-
-    // const elementIndex = todos.findIndex((todo)=>{
-    //     return todo.id.toString()=== req.params.id
-    // });
-    // if (elementIndex=== -1) {
-    //     return res.status(404).send();
-    // }
-
-    // todos.splice(elementIndex,1);
-    // const updatedTodo = { id: Number(req.params.id), ...req.body };
-    // todos.push(updatedTodo);
-
-    // return res.json(updatedTodo);
 }
 
 

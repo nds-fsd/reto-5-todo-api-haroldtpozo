@@ -1,19 +1,19 @@
 exports.todos = [{
   id: 0,
   text: "Hacer la cama",
-  fecha: new Date("2022-05-21"),
+  fecha: new Date,
   done: false
 },
 { 
   id: 1,
   text: "Ir al super",
-  fecha: new Date("2022-05-14"),
+  fecha: new Date,
   done: true
 },
 { 
   id: 2,
   text: "Hacer el reto",
-  fecha: new Date("2022-05-14"),
+  fecha: new Date,
   done: true
 }
 ];
