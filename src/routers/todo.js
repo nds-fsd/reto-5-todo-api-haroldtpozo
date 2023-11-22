@@ -1,6 +1,6 @@
 const express = require ('express');
 const controller = require ('../controllers/controll');
-const {todos} = require ('../data/index');
+
 
 const todoRouter = express.Router();
 
@@ -12,7 +12,7 @@ todoRouter.post ('/todo',controller.postCreate)
 
 todoRouter.put('/todo/:id',controller.putUpdate)
 
-todoRouter.delete ('/todo/id',controller.deleteById)
+todoRouter.delete ('/todo/:id',controller.deleteById)
 
 
 module.exports = todoRouter;
