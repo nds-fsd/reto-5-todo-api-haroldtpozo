@@ -25,6 +25,7 @@ const getById = (req,res)=>{
 const postCreate = (req,res)=>{
 
     const body = req.body;
+    console.log("Datos recibidos en postCreate:", body);
 
     if (!body) {
         return res.status(404).json ({message:"No hay datos"})
@@ -32,12 +33,12 @@ const postCreate = (req,res)=>{
     } else {
         const currentId = todos.map((todo)=> todo.id);
         const newId= Math.max(...currentId)+1;
-        const dateNueva = new Date (body.fecha);
+        const dateNueva = new Date (body.hora, body.mes - 1, body.dia);
         const newUser= {
             id: newId,
             text: body.text,
             hora: dateNueva.getHours(),
-            dia : dateNueva.getDay(),
+            dia : dateNueva.getDate(),
             mes: dateNueva.getMonth()+1,
             done: body.done,
         };
@@ -85,7 +86,7 @@ const deleteById = (req,res)=>{
         return res.status(404).json({message:"No encontré el id"});
     } else {
     todos.splice(elementDelete, 1)
-    return res.status(200).json(todos, {message:"Se ha borrado"});
+    return res.status(200).json({todos,message:"Se ha borrado"});
     }
     
 }
