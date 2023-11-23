@@ -32,10 +32,13 @@ const postCreate = (req,res)=>{
     } else {
         const currentId = todos.map((todo)=> todo.id);
         const newId= Math.max(...currentId)+1;
+        const dateNueva = new Date (body.fecha);
         const newUser= {
             id: newId,
             text: body.text,
-            fecha: new Date (),
+            hora: dateNueva.getHours(),
+            dia : dateNueva.getDay(),
+            mes: dateNueva.getMonth()+1,
             done: body.done,
         };
         
