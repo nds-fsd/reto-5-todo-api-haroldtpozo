@@ -33,13 +33,13 @@ const postCreate = (req,res)=>{
         
     } else {
         const currentId = todos.map((todo)=> todo.id);
-        const newId= Math.max(...currentId)+1;
+        const newId = currentId.length > 0 ? Math.max(...currentId) + 1 : 0;
         const newUser= {
             id: newId,
             text: body.text,
             hora: body.hora,
             dia : parseInt(body.dia),
-            mes: body.mes,
+            mes: body.mesNombre,
             done: body.done,
         };
         
@@ -115,7 +115,7 @@ const deleteById = (req,res)=>{
         return todo.id.toString()=== todoId;
     });
 
-    if (!elementDelete || elementDelete === -1) {
+    if (elementDelete === -1) {
         return res.status(404).json({message:"No encontré el id"});
     } else {
     todos.splice(elementDelete, 1)
@@ -123,6 +123,8 @@ const deleteById = (req,res)=>{
     }
     
 }
+
+
 
 module.exports={
     getAll,
