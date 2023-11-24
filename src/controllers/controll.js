@@ -23,6 +23,7 @@ const getById = (req,res)=>{
 // 
 
 const postCreate = (req,res)=>{
+    console.log ("Entro aqui");
 
     const body = req.body;
     console.log("Datos recibidos en postCreate:", body);
@@ -33,13 +34,12 @@ const postCreate = (req,res)=>{
     } else {
         const currentId = todos.map((todo)=> todo.id);
         const newId= Math.max(...currentId)+1;
-        const dateNueva = new Date (body.hora, body.mes - 1, body.dia);
         const newUser= {
             id: newId,
             text: body.text,
-            hora: dateNueva.getHours(),
-            dia : dateNueva.getDate(),
-            mes: dateNueva.getMonth()+1,
+            hora: body.hora,
+            dia : parseInt(body.dia),
+            mes: body.mes,
             done: body.done,
         };
         
@@ -49,9 +49,42 @@ const postCreate = (req,res)=>{
     
    
 };
+// 
+
+const patchUpdate = async (req, res) => { 
+    console.log(req.body)
+    try{
+        const { id } = req.params 
+        const body = req.body;
+        const {done} = body
+        let toDoFoundIndex = await todos.findIndex((todo) => todo.id === parseInt(id));
+        if (toDoFoundIndex !== -1) {
+             const updatedTodo = {
+                ...todos[toDoFoundIndex],
+                id: parseInt(id) || todos[toDoFoundIndex].id,
+                text: body.text || todos[toDoFoundIndex].text,
+                dia: body.dia || todos[toDoFoundIndex].dia,
+                mes: body.mes || todos[toDoFoundIndex].mes,
+                hora: body.hora || todos[toDoFoundIndex].hora,
+                done: done !== undefined ? done : todos[toDoFoundIndex].done,  
+             };
+            todos[toDoFoundIndex] = updatedTodo;
+            console.log(updatedTodo);
+            res.status(200).json(updatedTodo);
+        } else {
+            res.status(404).json({message: "No se encontro el todo "})
+        }
+        }catch(error){
+        console.log(error)
+    }
+}
 
 
 
+
+
+
+// 
 const putUpdate = (req,res)=>{
 
     const todoId = req.params.id;
@@ -97,4 +130,5 @@ module.exports={
     postCreate,
     putUpdate,
     deleteById,
+    patchUpdate
 };

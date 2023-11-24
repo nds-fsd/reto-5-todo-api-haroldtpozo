@@ -10,7 +10,9 @@ todoRouter.get('/todo/:id', controller.getById)
 
 todoRouter.post ('/todo',controller.postCreate)
 
-todoRouter.put('/todo/:id',controller.putUpdate)
+todoRouter.put('/todo/:id', controller.putUpdate)
+
+todoRouter.patch('/todo/:id',controller.patchUpdate)
 
 todoRouter.delete ('/todo/:id',controller.deleteById)
 
